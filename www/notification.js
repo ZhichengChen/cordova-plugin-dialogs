@@ -97,7 +97,18 @@ module.exports = {
         var _defaultText = (defaultText || "");
         exec(resultCallback, null, "Notification", "prompt", [_message, _title, _buttonLabels, _defaultText]);
     },
-
+    
+    /**
+     * Open a native password dialog, just like the prompt upside 
+     */
+    password: function(message, resultCallback, title, buttonLabel, defaultText) {
+        var _message = (message || 'Password message');
+        var _title = (title || 'Password');
+        var _buttonLabels = (buttonLabels || ["OK", "Cancel"]);
+        var _defaultText = (defaultText || "");
+        exec(resultCallback, null, "Notification", "password", [_message, _title, _buttonLabels, _defaultText]);
+    },
+    
     /**
      * Causes the device to beep.
      * On Android, the default notification ringtone is played "count" times.

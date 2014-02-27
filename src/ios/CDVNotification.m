@@ -23,6 +23,7 @@
 
 #define DIALOG_TYPE_ALERT @"alert"
 #define DIALOG_TYPE_PROMPT @"prompt"
+#define DIALOG_TYPE_PASSWORD @"password"
 
 static void soundCompletionCallback(SystemSoundID ssid, void* data);
 
@@ -61,6 +62,12 @@ static void soundCompletionCallback(SystemSoundID ssid, void* data);
         textField.text = defaultText;
     }
 
+    if ([dialogType isEqualToString:DIALOG_TYPE_PASSWORD]) {
+        alertView.alertViewStyle = UIAlertViewStyleSecureTextInput;
+        UITextField* textField = [alertView textFieldAtIndex:0];
+        textField.text = defaultText;
+    }
+
     [alertView show];
 }
 
@@ -93,6 +100,17 @@ static void soundCompletionCallback(SystemSoundID ssid, void* data);
     NSString* defaultText = [command argumentAtIndex:3];
 
     [self showDialogWithMessage:message title:title buttons:buttons defaultText:defaultText callbackId:callbackId dialogType:DIALOG_TYPE_PROMPT];
+}
+
+- (void)password:(CDVInvokedUrlCommand*)command
+{
+    NSString* callbackId = command.callbackId;
+    NSString* message = [command argumentAtIndex:0];
+    NSString* title = [command argumentAtIndex:1];
+    NSString* buttons = [command argumentAtIndex:2];
+    NSString* defaultText = [command argumentAtIndex:3];
+
+    [self showDialogWithMessage:message title:title buttons:buttons defaultText:defaultText callbackId:callbackId dialogType:DIALOG_TYPE_PASSWORD];
 }
 
 /**

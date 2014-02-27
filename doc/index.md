@@ -46,6 +46,7 @@ Edit __www/index.html__ and add following in `head` section:
 - `navigator.notification.alert`
 - `navigator.notification.confirm`
 - `navigator.notification.prompt`
+- `navigator.notification.passowrd`
 - `navigator.notification.beep`
 
 ## navigator.notification.alert
@@ -218,6 +219,50 @@ contains the following properties:
 
 Both native-blocking `window.prompt()` and non-blocking `navigator.notification.prompt()` are available.
 
+## navigator.notification.password
+
+Displays a native password dialog box that is more customizable than the browser's `prompt` function.
+
+    navigator.notification.password(message, passwordCallback, [title], [buttonLabels], [defaultText])
+
+- __message__: Dialog message. _(String)_
+
+- __passwordCallback__: Callback to invoke when a button is pressed. _(Function)_
+
+- __title__: Dialog title _(String)_ (Optional, defaults to `Password`)
+
+- __buttonLabels__: Array of strings specifying button labels _(Array)_ (Optional, defaults to `["OK","Cancel"]`)
+
+- __defaultText__: Default textbox input value (`String`) (Optional, Default: empty string)
+
+### passwordCallback
+
+The `passwordCallback` executes when the user presses one of the buttons
+in the prompt dialog box. The `results` object passed to the callback
+contains the following properties:
+
+- __buttonIndex__: The index of the pressed button. _(Number)_ Note that the index uses one-based indexing, so the value is `1`, `2`, `3`, etc.
+
+- __input1__: The text entered in the prompt dialog box. _(String)_
+
+### Example
+
+    function onPassword(results) {
+        alert("You selected button number " + results.buttonIndex + " and entered " + results.input1);
+    }
+
+    navigator.notification.password(
+        'Please enter your name',  // message
+        onPassword,                // callback to invoke
+        'Password',                // title
+        ['Ok','Exit'],             // buttonLabels
+        'password'                 // defaultText
+    );
+
+### Supported Platforms
+
+- iOS
+
 ## navigator.notification.beep
 
 The device plays a beep sound.
@@ -258,4 +303,5 @@ The device plays a beep sound.
 - Tizen implements beeps by playing an audio file via the media API.
 
 - The beep file must be short, must be located in a `sounds` subdirectory of the application's root directory, and must be named `beep.wav`.
+
 
