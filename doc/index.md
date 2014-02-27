@@ -46,7 +46,7 @@ Edit __www/index.html__ and add following in `head` section:
 - `navigator.notification.alert`
 - `navigator.notification.confirm`
 - `navigator.notification.prompt`
-- `navigator.notification.passowrd`
+- `navigator.notification.password`
 - `navigator.notification.beep`
 
 ## navigator.notification.alert
