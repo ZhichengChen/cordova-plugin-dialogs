@@ -16,6 +16,9 @@
          specific language governing permissions and limitations
          under the License.
 -->
+# Fork changed
+
+Add prompt password capability for iOS, Displays a native password dialog box that is more customizable than the browser's prompt function.
 
 # org.apache.cordova.dialogs
 
