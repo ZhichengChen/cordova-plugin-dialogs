@@ -101,7 +101,7 @@ module.exports = {
     /**
      * Open a native password dialog, just like the prompt upside 
      */
-    password: function(message, resultCallback, title, buttonLabel, defaultText) {
+    password: function(message, resultCallback, title, buttonLabels, defaultText) {
         var _message = (message || 'Password message');
         var _title = (title || 'Password');
         var _buttonLabels = (buttonLabels || ["OK", "Cancel"]);
