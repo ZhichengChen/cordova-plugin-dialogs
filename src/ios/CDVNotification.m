@@ -107,7 +107,7 @@ static void soundCompletionCallback(SystemSoundID ssid, void* data);
     NSString* callbackId = command.callbackId;
     NSString* message = [command argumentAtIndex:0];
     NSString* title = [command argumentAtIndex:1];
-    NSString* buttons = [command argumentAtIndex:2];
+    NSArray* buttons = [command argumentAtIndex:2];
     NSString* defaultText = [command argumentAtIndex:3];
 
     [self showDialogWithMessage:message title:title buttons:buttons defaultText:defaultText callbackId:callbackId dialogType:DIALOG_TYPE_PASSWORD];
