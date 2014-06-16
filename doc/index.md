@@ -262,6 +262,7 @@ contains the following properties:
 ### Supported Platforms
 
 - iOS
+- Android
 
 ## navigator.notification.beep
 

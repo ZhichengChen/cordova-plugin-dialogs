@@ -31,6 +31,7 @@ import android.content.DialogInterface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.text.InputType;
 import android.widget.EditText;
 
 /**
@@ -69,7 +70,11 @@ public class Notification extends CordovaPlugin {
             return true;
         }
         else if (action.equals("prompt")) {
-            this.prompt(args.getString(0), args.getString(1), args.getJSONArray(2), args.getString(3), callbackContext);
+            this.prompt(args.getString(0), args.getString(1), args.getJSONArray(2), args.getString(3), callbackContext, false);
+            return true;
+        }
+        else if (action.equals("password")) {
+            this.prompt(args.getString(0), args.getString(1), args.getJSONArray(2), args.getString(3), callbackContext, true);
             return true;
         }
         else if (action.equals("activityStart")) {
@@ -243,19 +248,22 @@ public class Notification extends CordovaPlugin {
      * Builds and shows a native Android prompt dialog with given title, message, buttons.
      * This dialog only shows up to 3 buttons.  Any labels after that will be ignored.
      * The following results are returned to the JavaScript callback identified by callbackId:
-     *     buttonIndex			Index number of the button selected
-     *     input1				The text entered in the prompt dialog box
+     *     buttonIndex      Index number of the button selected
+     *     input1       The text entered in the prompt dialog box
      *
      * @param message           The message the dialog should display
      * @param title             The title of the dialog
      * @param buttonLabels      A comma separated list of button labels (Up to 3 buttons)
      * @param callbackContext   The callback context.
      */
-    public synchronized void prompt(final String message, final String title, final JSONArray buttonLabels, final String defaultText, final CallbackContext callbackContext) {
-    	
+    public synchronized void prompt(final String message, final String title, final JSONArray buttonLabels, final String defaultText, final CallbackContext callbackContext, Boolean password) {
+      
         final CordovaInterface cordova = this.cordova;
         final EditText promptInput =  new EditText(cordova.getActivity());
         promptInput.setHint(defaultText);
+        if (password) {
+          promptInput.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        }
        
         Runnable runnable = new Runnable() {
             public void run() {
@@ -277,7 +285,7 @@ public class Notification extends CordovaPlugin {
                                     dialog.dismiss();
                                     try {
                                         result.put("buttonIndex",1);
-                                        result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());											
+                                        result.put("input1", promptInput.getText().toString().trim().length()==0 ? defaultText : promptInput.getText());                      
                                     } catch (JSONException e) { e.printStackTrace(); }
                                     callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, result));
                                 }

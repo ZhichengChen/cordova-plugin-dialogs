@@ -18,7 +18,7 @@
 -->
 # Fork changed
 
-Add prompt password capability for iOS, Displays a native password dialog box that is more customizable than the browser's prompt function.
+Add prompt password capability for iOS and Android, Displays a native password dialog box that is more customizable than the browser's prompt function.
 
 # org.apache.cordova.dialogs
 

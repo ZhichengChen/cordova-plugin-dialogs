@@ -63,7 +63,7 @@ module.exports = {
         // Some platforms take an array of button label names.
         // Other platforms take a comma separated list.
         // For compatibility, we convert to the desired type based on the platform.
-        if (platform.id == "android" || platform.id == "ios" || platform.id == "windowsphone" || platform.id == "firefoxos" || platform.id == "ubuntu") {
+        if (platform.id == "amazon-fireos" || platform.id == "android" || platform.id == "ios" || platform.id == "windowsphone" || platform.id == "firefoxos" || platform.id == "ubuntu") {
 
             if (typeof _buttonLabels === 'string') {
                 var buttonLabelString = _buttonLabels;
@@ -97,7 +97,7 @@ module.exports = {
         var _defaultText = (defaultText || "");
         exec(resultCallback, null, "Notification", "prompt", [_message, _title, _buttonLabels, _defaultText]);
     },
-    
+
     /**
      * Open a native password dialog, just like the prompt upside 
      */
@@ -108,7 +108,7 @@ module.exports = {
         var _defaultText = (defaultText || "");
         exec(resultCallback, null, "Notification", "password", [_message, _title, _buttonLabels, _defaultText]);
     },
-    
+
     /**
      * Causes the device to beep.
      * On Android, the default notification ringtone is played "count" times.
